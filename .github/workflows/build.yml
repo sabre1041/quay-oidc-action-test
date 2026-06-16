@@ -39,6 +39,7 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: sabre1041/quay-oidc-auth-action@main
         with:
+          hostname: ${{ vars.IMAGE_REGISTRY }}
           username: ${{ secrets.IMAGE_REGISTRY_USERNAME }}
 
       - name: Login to Container Registry
