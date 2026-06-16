@@ -45,7 +45,7 @@ jobs:
         with:
           hostname: ${{ vars.IMAGE_REGISTRY }}
           username: ${{ secrets.IMAGE_REGISTRY_USERNAME }}
-          verify-ssl: 'false'
+          tls-certificate: ${{ secrets.QUAY_CA_CERT }}
 
       - name: Login to Container Registry
         if: github.event_name != 'pull_request'
