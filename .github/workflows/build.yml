@@ -33,6 +33,10 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+        with:
+          buildkitd-config-inline: |
+            [registry.${{ vars.IMAGE_REGISTRY }}]
+              insecure = true
       
       - name: Obtain Quay Auth Token
         id: quay-auth
@@ -41,6 +45,7 @@ jobs:
         with:
           hostname: ${{ vars.IMAGE_REGISTRY }}
           username: ${{ secrets.IMAGE_REGISTRY_USERNAME }}
+          verify-ssl: 'false'
 
       - name: Login to Container Registry
         if: github.event_name != 'pull_request'
